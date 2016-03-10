@@ -9,11 +9,11 @@
         app:showAsAction="never" />
     <item android:id="@+id/add"
         android:title="@string/historia"
-        android:orderInCategory="1"
+        android:orderInCategory="10"
         app:showAsAction="ifRoom" />
     <item android:id="@+id/search"
         android:title="@string/busqueda"
-        android:orderInCategory="2"
-        app:showAsAction="ifRoom"/>
+        android:orderInCategory="20"
+        app:showAsAction="never"/>
 
 </menu>

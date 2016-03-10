@@ -1,6 +1,7 @@
 package com.ibisatebarredo.isports;
 
 import android.Manifest;
+
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -15,19 +16,38 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView posicionGPS;
+    private TextView titulo;
+    private Button caminar;
+    private Button correr;
+    private Button bicicleta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /* Pantalla Inicial: Identificar Botones y titulo */
+        titulo = (TextView) findViewById(R.id.titulo);
+        correr = (Button) findViewById(R.id.correr);
+        caminar = (Button) findViewById(R.id.caminar);
+        bicicleta = (Button) findViewById(R.id.bicicleta);
+
+        titulo.setText("Pulse Actividad");
+        caminar.setText("Correr");
+        correr.setText("Caminar");
+        bicicleta.setText("Bicicleta");
+
+
+        /* ToolBar */
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+/*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,8 +57,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+*/
         posicionGPS = (TextView) findViewById(R.id.posicionGPS);
+        posicionGPS.setText(" Esperando posicion GPS ...");
 
         // Acquire a reference to the system Location Manager
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
@@ -48,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location provider.
 
-                posicionGPS.setText("GPS: " + location.getLatitude() + ", " + location.getLongitude());
+                posicionGPS.setText(" GPS: " + location.getLatitude() + ", " + location.getLongitude());
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {
