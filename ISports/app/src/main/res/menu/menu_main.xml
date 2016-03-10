@@ -2,18 +2,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.ibisatebarredo.isports.MainActivity">
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
+
+    <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
+        android:orderInCategory="100"
         app:showAsAction="never" />
     <item android:id="@+id/add"
-        android:title="@string/historia"
         android:orderInCategory="10"
-        app:showAsAction="ifRoom" />
+        android:title="@string/historia"
+        app:showAsAction="never" />
     <item android:id="@+id/search"
-        android:title="@string/busqueda"
         android:orderInCategory="20"
-        app:showAsAction="never"/>
+        android:title="@string/estadistica"
+        app:showAsAction="never" />
 
 </menu>

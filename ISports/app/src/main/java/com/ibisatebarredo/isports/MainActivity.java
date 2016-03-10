@@ -3,6 +3,7 @@ package com.ibisatebarredo.isports;
 import android.Manifest;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -39,25 +40,15 @@ public class MainActivity extends AppCompatActivity {
         bicicleta = (Button) findViewById(R.id.bicicleta);
 
         titulo.setText("Pulse Actividad");
-        caminar.setText("Correr");
-        correr.setText("Caminar");
+        caminar.setText("Caminar");
+        correr.setText("Correr");
         bicicleta.setText("Bicicleta");
-
 
         /* ToolBar */
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-/*
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
-*/
+
         posicionGPS = (TextView) findViewById(R.id.posicionGPS);
         posicionGPS.setText(" Esperando posicion GPS ...");
 
@@ -85,12 +76,31 @@ public class MainActivity extends AppCompatActivity {
         // Register the listener with the Location Manager to receive location updates
 
         // http://developer.android.com/intl/es/training/permissions/requesting.html
-        int permissionCheck = ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION);
+        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
 
         if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
             //locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
         }
+        findViewById(R.id.caminar).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Main2Activity.class));
+            }
+        });
+        findViewById(R.id.correr).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Main2Activity.class));
+            }
+        });
+        findViewById(R.id.bicicleta).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Main2Activity.class));
+            }
+        });
+
     }
 
 
