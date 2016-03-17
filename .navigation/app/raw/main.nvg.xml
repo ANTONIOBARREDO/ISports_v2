@@ -6,18 +6,10 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
-        className = "com.ibisatebarredo.isports.MapsActivity"/>
-      <point      
-        x = "3516"      
-        y = "556"/>
-    </statePointEntry>
-    <statePointEntry>
-      <state      
-        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
         className = "com.ibisatebarredo.isports.Main2Activity"/>
       <point      
-        x = "1768"      
-        y = "100"/>
+        x = "1452"      
+        y = "108"/>
     </statePointEntry>
     <statePointEntry>
       <state      
