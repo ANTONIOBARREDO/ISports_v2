@@ -10,7 +10,7 @@
     tools:context="com.ibisatebarredo.isports.MainActivity">
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="CORRER"
         android:id="@+id/button"
@@ -19,7 +19,7 @@
         android:drawableLeft="@drawable/running" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="CAMINAR"
         android:id="@+id/button3"
@@ -27,7 +27,7 @@
         android:drawableLeft="@drawable/walking" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="CICLISMO"
         android:id="@+id/button4"
