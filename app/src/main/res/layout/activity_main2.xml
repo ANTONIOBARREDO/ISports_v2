@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.ibisatebarredo.isports.Main2Activity">
+    tools:context="com.ibisatebarredo.isports.Main2Activity"
+    android:background="@drawable/foto">
 
     <Button
         android:layout_width="wrap_content"
@@ -15,6 +16,7 @@
         android:text="MAPA"
         android:id="@+id/button2"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp" />
 
 </RelativeLayout>
