@@ -12,7 +12,6 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,8 +40,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     // --- private SupportMapFragment mapFrag;
     private List<LatLng> lista;
     int cont=0;
-    TextView e_Distancia;
-    Button tmapa;
+    // TextView e_Distancia = (TextView) findViewById(R.id.textView);
+
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -61,12 +60,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-
-
-        e_Distancia = (TextView) findViewById(R.id.textView);
-        tmapa = (Button) findViewById(R.id.bmapa);
-        e_Distancia.setText("DISTANCIA");
-        tmapa.setText("Tipo Mapa");
     }
 
 
@@ -150,15 +143,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
             //locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 0, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
         }
 
         // Add a marker in Vitoria and move the camera
         LatLng v = new LatLng(42.846350, -2.672246);
         mMap.addMarker(new MarkerOptions().position(v).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)).title("Tamos en ello").snippet("Aqui en Siberia"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(v));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 200, null);
     }
 
         public void onMapClick(LatLng puntoPulsado) {
@@ -189,7 +181,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 distance += cDistance(lista.get(i), lista.get(i + 1));
             }
         }
-        // tmapa.setText((int) distance);
         // ----e_Distancia.setText((int) distance);
         //Toast.makeText(MapsActivity.this, "", Toast.LENGTH_SHORT).show();
 
