@@ -1,9 +1,0 @@
-<resources>
-    <string name="app_name">ISports</string>
-    <string name="action_settings">Ajustes</string>
-    <string name="historia">Historia</string>
-    <string name="busqueda">Busqueda</string>
-    <string name="estadistica">Estadisticas</string>
-    <string name="title_activity_main2">Actividad en curso</string>
-    <string name="title_activity_maps">GeoLocalizacion</string>
-</resources>

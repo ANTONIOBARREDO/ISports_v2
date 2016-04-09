@@ -6,18 +6,34 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
-        className = "com.ibisatebarredo.isports.Main2Activity"/>
+        className = "com.ibisatebarredo.isports2.Fin"/>
       <point      
-        x = "1452"      
-        y = "108"/>
+        x = "284"      
+        y = "1720"/>
     </statePointEntry>
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
-        className = "com.ibisatebarredo.isports.MainActivity"/>
+        className = "com.ibisatebarredo.isports2.Inicio"/>
       <point      
-        x = "500"      
-        y = "100"/>
+        x = "324"      
+        y = "124"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.ibisatebarredo.isports2.Mapa"/>
+      <point      
+        x = "1716"      
+        y = "116"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.ibisatebarredo.isports2.Historia"/>
+      <point      
+        x = "3036"      
+        y = "1480"/>
     </statePointEntry>
   </locations>
 </navigationModel>
