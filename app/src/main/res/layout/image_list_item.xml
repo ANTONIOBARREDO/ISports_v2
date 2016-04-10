@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@android:style/TextAppearance.Holo.Medium"
+        android:textStyle="bold"
+        android:text="fecha"
+        android:id="@+id/c_fecha"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+ />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@android:style/TextAppearance.Holo.Medium"
+        android:text="tiempo"
+        android:id="@+id/c_tiempo"
+        android:layout_below="@+id/c_fecha"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@android:style/TextAppearance.Holo.Medium"
+        android:text="duracion"
+        android:id="@+id/c_duracion"
+        android:layout_alignTop="@+id/c_tiempo"
+        android:layout_toEndOf="@+id/c_actividad" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@android:style/TextAppearance.Holo.Medium"
+        android:textStyle="bold"
+        android:text="actividad"
+        android:id="@+id/c_actividad"
+        android:layout_below="@+id/c_duracion"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@android:style/TextAppearance.Holo.Medium"
+        android:text="observacion"
+        android:id="@+id/c_observacion"
+        android:layout_below="@+id/c_actividad"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>

@@ -26,7 +26,6 @@ public class Inicio extends AppCompatActivity {
 
         setTitle("ISports. Inicio");
 
-
         b_musica = (Button) findViewById(R.id.b_musica);
         b_musica.setText("Musica. Iniciar");
 
@@ -88,6 +87,18 @@ public class Inicio extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+        if (id == R.id.action_musicai) {
+            mediaPlayer = MediaPlayer.create(Inicio.this, R.raw.cancion2);
+            mediaPlayer.setLooping(true);
+            mediaPlayer.setVolume(30, 30);
+            mediaPlayer.start();
+        }
+        if (id == R.id.action_musicap) {
+            mediaPlayer.pause();
+        }
+        if (id == R.id.action_musicas) {
+            mediaPlayer.stop();
         }
 
         return super.onOptionsItemSelected(item);
