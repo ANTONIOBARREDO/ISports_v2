@@ -36,6 +36,5 @@
         android:text="Musica"
         android:id="@+id/b_musica"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="40dp" />
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

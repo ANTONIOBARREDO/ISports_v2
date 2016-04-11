@@ -53,10 +53,14 @@ public class BBDD {
         if (bd.isOpen() && r != null) {
 
             String where = "fecha = ?";
-            CharSequence[] argumentoswhere = new CharSequence[]{r.getFecha()};
-            bd.delete(tabla, where, (String[]) argumentoswhere);
+            // CharSequence[] argumentoswhere = new CharSequence[]{r.getFecha()};
+            //bd.delete(tabla, where, (String[]) argumentoswhere);
+            String [] argumentoswhere = convertToStringArray(new CharSequence[]{r.getFecha()});
+            bd.delete(tabla, where, argumentoswhere);
+
         }
     }
+
 
     public recorrido fin_Recorrido (String nombre) {
 
@@ -115,6 +119,19 @@ public class BBDD {
         return lr;
     }
 
+    public String[] convertToStringArray(CharSequence[] charSequences) {
+        if (charSequences instanceof String[]) {
+            return (String[]) charSequences;
+        }
+
+        String[] strings = new String[charSequences.length];
+        for (int index = 0; index < charSequences.length; index++) {
+            strings[index] = charSequences[index].toString();
+        }
+
+        return strings;
+    }
+
     private class BDHelper extends SQLiteOpenHelper {
 
         String create_table = "CREATE TABLE  RECORRIDOS ( id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,fecha TEXT,tiempo TEXT,distancia TEXT,actividad TEXT,observacion TEXT);";
@@ -146,6 +163,8 @@ public class BBDD {
             }
 
         }
+
+
 
     }
 

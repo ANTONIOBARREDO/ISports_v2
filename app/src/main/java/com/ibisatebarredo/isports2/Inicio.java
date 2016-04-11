@@ -40,7 +40,7 @@ public class Inicio extends AppCompatActivity {
                    //Cuando aprieto el parar
                     b_musica.setText("Musica. Parar");
 
-                    mediaPlayer = MediaPlayer.create(Inicio.this, R.raw.cancion2);
+                    mediaPlayer = MediaPlayer.create(Inicio.this, R.raw.cancion);
                     mediaPlayer.setLooping(true);
                     mediaPlayer.setVolume(30, 30);
                     mediaPlayer.start();
@@ -51,10 +51,6 @@ public class Inicio extends AppCompatActivity {
             }
 
         });
-
-
-
-
 
         findViewById(R.id.b_recorrido).setOnClickListener(new View.OnClickListener() {
             @Override

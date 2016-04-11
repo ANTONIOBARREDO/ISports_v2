@@ -5,4 +5,9 @@
     <string name="Musica.Iniciar">Musica.Iniciar</string>
     <string name="Musica.Pausar">Musica.Pausar</string>
     <string name="Musica.Parar">Musica.Parar</string>
+    <string name="Limpiar">Limpiar</string>
+    <string name="Eliminar_Recorrido">Borrar Recorrido</string>
+    <string name="Eliminar_Todos_Recorridos">Borrar TODO</string>
+    <string name="Ordenar_Fecha">Ordenar Fecha</string>
+    <string name="Ordenar_Actividad">Ordenar Actividad</string>
 </resources>
