@@ -12,11 +12,13 @@ import android.os.SystemClock;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,6 +30,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Mapa extends FragmentActivity implements OnMapReadyCallback, View.OnClickListener {
@@ -37,13 +40,17 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, View.O
     Marker marker;
     List<LatLng> lista;
 
-
     String fecha;
-    String tiempo="23:59";
-    String distancia="9.59";
+    Double distancia;
 
     Chronometer c_crono;
     TextView l_crono;
+    TextView l_distancia;
+    TextView c_distancia;
+    TextView l_velocidad;
+    TextView c_velocidad;
+    TextView c_latlon;
+
     Button b_accion;
     Button b_vista;
     String vista;
@@ -59,10 +66,20 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, View.O
 
         c_crono = (Chronometer) findViewById(R.id.c_crono);
         l_crono = (TextView) findViewById(R.id.l_crono);
+        l_distancia = (TextView) findViewById(R.id.l_distancia);
+        c_distancia = (TextView) findViewById(R.id.c_distancia);
+        l_velocidad = (TextView) findViewById(R.id.l_velocidad);
+        c_velocidad = (TextView) findViewById(R.id.c_velocidad);
+        c_latlon = (TextView) findViewById(R.id.c_latlon);
         b_accion = (Button) findViewById(R.id.b_accion);
         b_vista = (Button) findViewById(R.id.b_vista);
 
         l_crono.setText("Duracion");
+        l_distancia.setText("Distancia");
+        l_velocidad.setText("Velocidad");
+        c_distancia.setText("0.0");
+        c_velocidad.setText("0.0");
+        c_latlon.setText("A la espera de posicion GPS");
         b_accion.setText("Iniciar");
         b_vista.setText("Vista");
 
@@ -84,6 +101,8 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, View.O
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        lista = new ArrayList<LatLng>();
+
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)   != PackageManager.PERMISSION_GRANTED &&
             ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -97,14 +116,10 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, View.O
         mMap.moveCamera(CameraUpdateFactory.newLatLng(v));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
 
+    }
 
-        /*
-        map.setOnInfoWindowClickListener(this);
-        //Recoge las coordenadas cada 5 segundos
-        map.setOnMyLocationChangeListener(this);
-         */
+    public void iniciar_ruta() {
 
-        // ----
         // Acquire a reference to the system Location Manager
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
@@ -112,33 +127,39 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, View.O
         LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location provider.
-                // Add a marker in Sydney and move the camera
+                // Add a marker
                 LatLng gps = new LatLng(location.getLatitude(), location.getLongitude());
-                // posicionGPS.setText(" GPS: " + location.getLatitude() + ", " + location.getLongitude());
+                c_latlon.setText(" GPS: " + location.getLatitude() + ", " + location.getLongitude());
+
                 lista.add(gps);
-                getDistance();
+                distancia=dame_Distancia();
                 pintar_ruta();
+
+                c_distancia.setText(Double.toString(distancia) + "\n km");
+                float num = location.getSpeed();
+                c_velocidad.setText(num * 3.6 + "\n km/h");   // \n
 
                 if (marker != null) {
                     marker.remove();
                 }
+
                 marker = mMap.addMarker(new MarkerOptions().position(gps).title("En Vitoria City"));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(gps));
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(15),200,null);
+                    // mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 200, null);
+                    //mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
             }
-
 
             public void onStatusChanged(String provider, int status, Bundle extras) {
+                //Toast.makeText(Mapa.this, ">>>>> onStatusChanged ", Toast.LENGTH_LONG).show();
             }
-
             public void onProviderEnabled(String provider) {
+                Toast.makeText(Mapa.this, "GPS activado", Toast.LENGTH_LONG).show();
             }
-
             public void onProviderDisabled(String provider) {
+                Toast.makeText(Mapa.this, "Activar el GPS", Toast.LENGTH_LONG).show();
             }
         };
 
-/*
         // http://developer.android.com/intl/es/training/permissions/requesting.html
         int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
 
@@ -146,8 +167,6 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, View.O
             //locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 0, locationListener);
         }
-
-*/
     }
 
     public void pintar_ruta() {
@@ -167,17 +186,17 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, View.O
         }
     }
 
-    public void getDistance () {
+    public double dame_Distancia () {
         double distance=0;
         for (int i = 0, tam = lista.size(); i < tam; i++){
             if (i < tam -1) {
-                distance += cDistance(lista.get(i), lista.get(i + 1));
+                distance += calcular_Distancia(lista.get(i), lista.get(i + 1));
             }
         }
-
+        return distance;
     }
 
-    public static double cDistance(LatLng StartP,LatLng EndP){
+    public static double calcular_Distancia(LatLng StartP,LatLng EndP){
         // fórmula de Haversine
         int Radius = 6371000; //Radio de la tierra
         double lat1 = StartP.latitude;
@@ -188,8 +207,8 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, View.O
         double dLon = Math.toRadians(lon2-lon1);
         double a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
         double c = 2 * Math.asin(Math.sqrt(a));
-        return (Radius * c);
-
+        double d = (Radius * c); // en Km
+        return (double) (Math.round(d*1)/1); // Redondeo a un decimal
     }
 
     @Override
@@ -204,18 +223,15 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, View.O
                     c_crono.setBase(SystemClock.elapsedRealtime());
                     c_crono.start();
                     b_accion.setText("Parar");
+                    iniciar_ruta();
+
                 } else {
                     c_crono.stop();
                     b_accion.setText("Iniciar");
 
-                    /*
-                    long minutos = ((SystemClock.elapsedRealtime() - cronometro.getBase()) /1000)/60;
-                    long segundos = ((SystemClock.elapsedRealtime()-cronometro.getBase())/1000)%60;
-                    time =(minutos +" : "+segundos);
-                    cronometro.setText(time);
-
-                    intent.putExtra("duracion",cronometro.getText());
-                    */
+                    long minutos = ((SystemClock.elapsedRealtime() - c_crono.getBase()) /1000)/60;
+                    long segundos = ((SystemClock.elapsedRealtime()-c_crono.getBase())/1000)%60;
+                    String tiempo =(minutos+":"+segundos);
 
                     // Creamos el Intent para Lanzar actividad de FIN
                     Intent i = new Intent(getApplicationContext(), Fin.class);
@@ -223,7 +239,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, View.O
                     // Cargamos los datos en el Intent
                     i.putExtra("fecha", fecha);
                     i.putExtra("tiempo", tiempo);
-                    i.putExtra("distancia", distancia);
+                    i.putExtra("distancia", c_distancia.getText());
 
                     // Arrancar la actividad
                     startActivity(i);

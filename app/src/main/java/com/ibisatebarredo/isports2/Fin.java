@@ -61,7 +61,7 @@ public class Fin extends AppCompatActivity  {
         l_tiempo.setText("Fecha:");
         l_tiempo.setText("Tiempo:");
         l_distancia.setText("Distancia:");
-        l_velocidad.setText("Velocidad media:");
+        l_velocidad.setText("Velocidad:");
         l_observacion.setText("Comentario:");
         l_actividad.setText("Seleccionar Actividad:");
 

@@ -46,7 +46,7 @@ public class Historia extends AppCompatActivity implements AdapterView.OnItemCli
         r = base_datos.consultar_recorridos();
 
         //Inicializar el adaptador con la fuente de datos
-        adaptador = new TareaArrayAdapter(this, r);
+        adaptador = new RecorridoArrayAdapter(this, r);
 
         //Relacionando la lista con el adaptador
         c_lista.setAdapter(adaptador);

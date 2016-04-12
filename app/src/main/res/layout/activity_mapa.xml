@@ -26,10 +26,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/c_crono"
-        android:textSize="40dp"
-        android:layout_marginStart="30dp"
+        android:textSize="25dp"
+        android:layout_marginEnd="30dp"
         android:layout_below="@+id/l_crono"
-        android:layout_alignParentStart="true" />
+        android:layout_toStartOf="@+id/b_accion" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -44,9 +44,57 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="duracion"
+        android:text="Duracion"
         android:id="@+id/l_crono"
+        android:layout_alignBaseline="@+id/l_distancia"
+        android:layout_alignBottom="@+id/l_distancia"
+        android:layout_alignEnd="@+id/c_crono" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Distancia"
+        android:id="@+id/l_distancia"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/c_crono" />
+        android:layout_alignEnd="@+id/c_distancia" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Velocidad"
+        android:id="@+id/l_velocidad"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/b_accion" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="20dp"
+        android:text="0.00"
+        android:id="@+id/c_distancia"
+        android:layout_alignTop="@+id/c_velocidad"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="20dp"
+        android:text="0.0"
+        android:id="@+id/c_velocidad"
+        android:layout_below="@+id/l_velocidad"
+        android:layout_alignEnd="@+id/l_velocidad" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Latitud-Longitud"
+        android:id="@+id/c_latlon"
+        android:layout_above="@+id/b_accion"
+        android:layout_alignEnd="@+id/b_vista" />
 
 </RelativeLayout>

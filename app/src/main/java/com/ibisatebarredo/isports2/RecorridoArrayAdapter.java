@@ -1,6 +1,5 @@
 package com.ibisatebarredo.isports2;
 
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +10,11 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * Created by anton_000 on 10/04/2016.
+ * Created by anton_000 on 11/04/2016.
  */
+public class RecorridoArrayAdapter extends ArrayAdapter<recorrido> {
 
-public class TareaArrayAdapter extends ArrayAdapter<recorrido> {
-
-    public TareaArrayAdapter(Context context, List<recorrido> objects) {
+    public RecorridoArrayAdapter (Context context, List<recorrido> objects) {
         super(context, 0, objects);
     }
 
