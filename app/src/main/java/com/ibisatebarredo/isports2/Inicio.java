@@ -1,5 +1,6 @@
 package com.ibisatebarredo.isports2;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class Inicio extends AppCompatActivity {
 
@@ -25,6 +27,9 @@ public class Inicio extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         setTitle("ISports. Inicio");
+
+        // ActionBar actionBar = getActionBar();
+        // actionBar.setIcon(R.drawable.ic_launcher);
 
         b_musica = (Button) findViewById(R.id.b_musica);
         b_musica.setText("Musica. Iniciar");
@@ -82,10 +87,11 @@ public class Inicio extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Toast.makeText(this, "No disponible. Compre versión PRO", Toast.LENGTH_LONG).show();
+            // return true;
         }
         if (id == R.id.action_musicai) {
-            mediaPlayer = MediaPlayer.create(Inicio.this, R.raw.cancion2);
+            mediaPlayer = MediaPlayer.create(this, R.raw.cancion2);
             mediaPlayer.setLooping(true);
             mediaPlayer.setVolume(30, 30);
             mediaPlayer.start();

@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.ibisatebarredo.isports2.Fin">
+    tools:context="com.ibisatebarredo.isports2.Fin"
+    android:background="#defcf9">
 
     <TextView
         android:layout_width="wrap_content"
@@ -106,7 +107,7 @@
         android:id="@+id/s_actividad"
         android:layout_below="@+id/l_actividad"
         android:layout_alignParentStart="true"
-        android:background="#59f939" />
+        android:background="#2cd3de" />
 
     <Button
         android:layout_width="wrap_content"
@@ -130,6 +131,6 @@
         android:id="@+id/c_observacion"
         android:layout_below="@+id/l_observacion"
         android:layout_alignParentStart="true"
-        android:background="#59f939" />
+        android:background="#2cd3de" />
 
 </RelativeLayout>

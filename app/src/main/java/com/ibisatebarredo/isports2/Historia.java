@@ -2,6 +2,7 @@ package com.ibisatebarredo.isports2;
 
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -21,7 +22,6 @@ public class Historia extends AppCompatActivity implements AdapterView.OnItemCli
 
     ListView c_lista;
     ArrayAdapter adaptador;
-
     BBDD base_datos;
 
     int posicion_selecionada=999999;
@@ -94,7 +94,7 @@ public class Historia extends AppCompatActivity implements AdapterView.OnItemCli
 
                 posicion_selecionada=999999;
             }else {
-                Toast.makeText(this, "Seleccione un Recorrido", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Seleccione un Recorrido para Borrarlo", Toast.LENGTH_LONG).show();
             }
 
             return true;
@@ -102,7 +102,7 @@ public class Historia extends AppCompatActivity implements AdapterView.OnItemCli
 
          if (id == R.id.action_delete_all || id == R.id.action_order_1 || id == R.id.action_order_2) {
             //Borrar todos los elementos
-            Toast.makeText(this, "No disponible", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "No disponible. Compre versión PRO", Toast.LENGTH_LONG).show();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -112,7 +112,7 @@ public class Historia extends AppCompatActivity implements AdapterView.OnItemCli
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         posicion_selecionada=position;
         recorrido r = (recorrido)adaptador.getItem(position);
-        String msg = "Seleccion: \n"+r.getFecha()+" - "+r.getActividad();
+        String msg = "Seleccion para borrado (x): \n"+r.getFecha()+" - "+r.getActividad();
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
 }

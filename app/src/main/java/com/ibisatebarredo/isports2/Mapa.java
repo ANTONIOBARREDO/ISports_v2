@@ -24,6 +24,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -39,9 +40,10 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, View.O
     Polyline polyline;
     Marker marker;
     List<LatLng> lista;
+    Boolean marca=false;
 
     String fecha;
-    Double distancia;
+    Double distancia=0.0;
 
     Chronometer c_crono;
     TextView l_crono;
@@ -127,26 +129,36 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, View.O
         LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location provider.
-                // Add a marker
+
                 LatLng gps = new LatLng(location.getLatitude(), location.getLongitude());
+
+                // marca inicio
+                if (!marca) {
+                    marca=true; // entro la primera vez y pongo marker
+                    mMap.addMarker(new MarkerOptions().position(gps).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)).title("Inicio Recorrido").snippet("Buen día"));
+                }
+                // mover camara
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(gps));
+
+                // proceso
+                lista.add(gps);                 // Añadir posicion al array
+                distancia=dame_Distancia();     // distancia entre los puntos
+                pintar_ruta();                  // pintar Ruta en el mapa
+
+                // mostrar datos en pantalla
                 c_latlon.setText(" GPS: " + location.getLatitude() + ", " + location.getLongitude());
-
-                lista.add(gps);
-                distancia=dame_Distancia();
-                pintar_ruta();
-
                 c_distancia.setText(Double.toString(distancia) + "\n km");
                 float num = location.getSpeed();
                 c_velocidad.setText(num * 3.6 + "\n km/h");   // \n
 
-                if (marker != null) {
-                    marker.remove();
-                }
+                //if (marker != null) {
+                //    marker.remove();
+                //}
 
-                marker = mMap.addMarker(new MarkerOptions().position(gps).title("En Vitoria City"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(gps));
-                    // mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 200, null);
-                    //mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
+                // marker = mMap.addMarker(new MarkerOptions().position(gps).title("En Vitoria City"));
+                // mMap.moveCamera(CameraUpdateFactory.newLatLng(gps));
+                // mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 200, null);
+                //mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -193,7 +205,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, View.O
                 distance += calcular_Distancia(lista.get(i), lista.get(i + 1));
             }
         }
-        return distance;
+        return (double) (Math.round((distance/1000)*1)/1);  //((Math.round(distance*1)/1)/1000); // Redondeo a un decimal y paso a KM
     }
 
     public static double calcular_Distancia(LatLng StartP,LatLng EndP){
@@ -207,8 +219,8 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, View.O
         double dLon = Math.toRadians(lon2-lon1);
         double a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
         double c = 2 * Math.asin(Math.sqrt(a));
-        double d = (Radius * c); // en Km
-        return (double) (Math.round(d*1)/1); // Redondeo a un decimal
+        double d = (Radius * c); // en m
+        return d;
     }
 
     @Override
@@ -239,7 +251,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, View.O
                     // Cargamos los datos en el Intent
                     i.putExtra("fecha", fecha);
                     i.putExtra("tiempo", tiempo);
-                    i.putExtra("distancia", c_distancia.getText());
+                    i.putExtra("distancia", Double.toString(distancia));    //c_distancia.getText());
 
                     // Arrancar la actividad
                     startActivity(i);
@@ -279,61 +291,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, View.O
 
                 break;
 
-/*
-            case R.id.b_iniciar:
 
-                cronometro.setVisibility(View.VISIBLE);
-
-                date = (DateFormat.format("dd-MM-yyyy HH:mm:ss", new java.util.Date()).toString());
-                //Iniciar el cronómetro
-          --      cronometro.setBase(SystemClock.elapsedRealtime());
-          --      cronometro.start();
-
-
-                comenzar = true;
-
-                location = map.getMyLocation();
-                onMyLocationChange(location);
-                latLong = new LatLng(map.getMyLocation().getLatitude(),
-                        map.getMyLocation().getLongitude());
-                String cad = String.valueOf((latLong.latitude));
-                cad = cad.substring(0, 9);
-                String cad2 = String.valueOf((latLong.longitude));
-                cad2 = cad2.substring(0, 8);
-
-                this.map.addMarker(new MarkerOptions().position(latLong)
-                        .title("INICIO:")
-                        .snippet("Latitud: " + String.valueOf(cad)
-                                + "\nLongitud: " + String.valueOf(cad2)));
-
-                list.add(latLong);
-
-                ruta();
-
-                break;
-
-            case R.id.bparar:
-                cronometro.setVisibility(View.INVISIBLE);
-                cronometro.stop();
-                long minutos = ((SystemClock.elapsedRealtime()-cronometro.getBase())/1000)/60;
-                long segundos = ((SystemClock.elapsedRealtime()-cronometro.getBase())/1000)%60;
-                time =(minutos +" : "+segundos);
-                cronometro.setText(time);
-
-
-                latLong = new LatLng(map.getMyLocation().getLatitude(),
-                        map.getMyLocation().getLongitude());
-
-                list.add(latLong);
-
-                comenzar = false;
-                Intent intent = new Intent(MapsActivity.this,ResumenCarrera.class);
-                intent.putExtra("duracion",cronometro.getText());
-                intent.putExtra("date",date);
-                intent.putExtra("recorrido",po);
-                startActivity(intent);
-                break;
-*/
             default:
                 break;
 

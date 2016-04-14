@@ -1,14 +1,18 @@
 package com.ibisatebarredo.isports2;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Fin extends AppCompatActivity  {
 
@@ -75,7 +79,7 @@ public class Fin extends AppCompatActivity  {
 
         // Spinner de actividad. ArrayAdapter -
         // Array de String que contiene los datos
-        String[] actividades = {"> Caminar", "> Correr", "> Ciclismo", "> Patinaje", "> Esquiar"};
+        String[] actividades = {"> Caminar", "> Correr", "> Ciclismo", "> Patinaje", "> Esquiar", "> Conducir", "> Practicas CAP", "> Carnet D"};
         // Creamos el adaptador partiendo del array
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, actividades);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -85,11 +89,12 @@ public class Fin extends AppCompatActivity  {
         // Asignar valores pasados
         fecha= getIntent().getStringExtra("fecha");
         tiempo= getIntent().getStringExtra("tiempo");
-        distancia= getIntent().getStringExtra("distancia");
+        distancia= getIntent().getStringExtra("distancia") + " Km";
 
         c_fecha.setText(fecha);
         c_tiempo.setText(tiempo);
         c_distancia.setText(distancia);
+        c_velocidad.setText("0.0 Km/h");
 
         findViewById(R.id.b_cancelar).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,5 +120,25 @@ public class Fin extends AppCompatActivity  {
         });
 
 
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_fin, menu);
+    return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            Toast.makeText(this, "No disponible. Compre versión PRO", Toast.LENGTH_LONG).show();
+            // return true;
+        }
+
+
+        return super.onOptionsItemSelected(item);
     }
 }
