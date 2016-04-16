@@ -29,14 +29,13 @@
         android:textAppearance="@android:style/TextAppearance.Holo.Medium"
         android:text="duracion"
         android:id="@+id/c_duracion"
-        android:layout_alignTop="@+id/c_tiempo"
-        android:layout_toEndOf="@+id/c_actividad" />
+        android:layout_below="@+id/c_tiempo"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@android:style/TextAppearance.Holo.Medium"
-        android:textStyle="bold"
         android:text="actividad"
         android:id="@+id/c_actividad"
         android:layout_below="@+id/c_duracion"

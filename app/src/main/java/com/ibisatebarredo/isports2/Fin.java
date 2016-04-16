@@ -65,7 +65,7 @@ public class Fin extends AppCompatActivity  {
         l_tiempo.setText("Fecha:");
         l_tiempo.setText("Tiempo:");
         l_distancia.setText("Distancia:");
-        l_velocidad.setText("Velocidad:");
+        l_velocidad.setText("");     // "Velocidad:"
         l_observacion.setText("Comentario:");
         l_actividad.setText("Seleccionar Actividad:");
 
@@ -89,12 +89,12 @@ public class Fin extends AppCompatActivity  {
         // Asignar valores pasados
         fecha= getIntent().getStringExtra("fecha");
         tiempo= getIntent().getStringExtra("tiempo");
-        distancia= getIntent().getStringExtra("distancia") + " Km";
+        distancia= getIntent().getStringExtra("distancia");  //  + " Km"
 
         c_fecha.setText(fecha);
         c_tiempo.setText(tiempo);
         c_distancia.setText(distancia);
-        c_velocidad.setText("0.0 Km/h");
+        c_velocidad.setText(""); // "0.0 Km/h"
 
         findViewById(R.id.b_cancelar).setOnClickListener(new View.OnClickListener() {
             @Override

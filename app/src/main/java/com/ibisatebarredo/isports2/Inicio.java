@@ -45,7 +45,7 @@ public class Inicio extends AppCompatActivity {
                    //Cuando aprieto el parar
                     b_musica.setText("Musica. Parar");
 
-                    mediaPlayer = MediaPlayer.create(Inicio.this, R.raw.cancion);
+                    mediaPlayer = MediaPlayer.create(Inicio.this, R.raw.carros);
                     mediaPlayer.setLooping(true);
                     mediaPlayer.setVolume(30, 30);
                     mediaPlayer.start();

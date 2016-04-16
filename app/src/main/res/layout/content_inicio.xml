@@ -18,24 +18,25 @@
         android:layout_height="wrap_content"
         android:text="Recorrido"
         android:id="@+id/b_recorrido"
-        android:layout_above="@+id/b_historia"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="58dp" />
+        android:height="130dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Historia"
         android:id="@+id/b_historia"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="94dp" />
+        android:height="130dp"
+        android:layout_below="@+id/b_recorrido"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Musica"
         android:id="@+id/b_musica"
+        android:height="130dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

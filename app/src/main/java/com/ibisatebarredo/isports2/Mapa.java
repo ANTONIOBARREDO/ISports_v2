@@ -83,7 +83,10 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, View.O
         c_velocidad.setText("0.0");
         c_latlon.setText("A la espera de posicion GPS");
         b_accion.setText("Iniciar");
+        b_accion.setBackgroundResource(R.color.verde);
+        //b_accion.setTextColor(getResources().getColor(R.color.verde));
         b_vista.setText("Vista");
+        b_vista.setBackgroundResource(R.color.gris);
 
         b_accion.setOnClickListener(this);
         b_vista.setOnClickListener(this);
@@ -205,7 +208,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, View.O
                 distance += calcular_Distancia(lista.get(i), lista.get(i + 1));
             }
         }
-        return (double) (Math.round((distance/1000)*1)/1);  //((Math.round(distance*1)/1)/1000); // Redondeo a un decimal y paso a KM
+        return (double) (Math.round((distance/1000)*10)/10);  //((Math.round(distance*1)/1)/1000); // Redondeo a dos decimales y paso a KM
     }
 
     public static double calcular_Distancia(LatLng StartP,LatLng EndP){
@@ -235,11 +238,15 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, View.O
                     c_crono.setBase(SystemClock.elapsedRealtime());
                     c_crono.start();
                     b_accion.setText("Parar");
+                    b_accion.setBackgroundResource(R.color.rojo);
+                    // b_accion.setTextColor(getResources().getColor(R.color.rojo));
                     iniciar_ruta();
 
                 } else {
                     c_crono.stop();
                     b_accion.setText("Iniciar");
+                    b_accion.setBackgroundResource(R.color.verde);
+                    //b_accion.setTextColor(getResources().getColor(R.color.verde));
 
                     long minutos = ((SystemClock.elapsedRealtime() - c_crono.getBase()) /1000)/60;
                     long segundos = ((SystemClock.elapsedRealtime()-c_crono.getBase())/1000)%60;
