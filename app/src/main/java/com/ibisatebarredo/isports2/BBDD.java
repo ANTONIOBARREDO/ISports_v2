@@ -61,36 +61,6 @@ public class BBDD {
         }
     }
 
-
-    public recorrido fin_Recorrido (String nombre) {
-
-        recorrido r = null;
-
-        if (bd.isOpen()) {
-
-            String[] columnas = new String[]{"id", "fecha","tiempo", "distancia", "actividad", "observacion"};
-            String where = "fecha = ?";
-            String[] argumentoswhere = new String[]{nombre};
-            String groupby = null;
-            String having = null;
-            String orderby = null;
-            String limit = null;
-
-            Cursor c1 = bd.query(tabla, columnas, where, argumentoswhere, groupby, having, orderby, limit);
-
-            if (c1.moveToFirst()) {
-                r = new recorrido();
-                r.setFecha(c1.getString(1));
-                r.setTiempo(c1.getString(2));
-                r.setDistancia(c1.getString(3));
-                r.setActividad(c1.getString(4));
-                r.setObservacion(c1.getString(5));
-            }
-        }
-
-        return r;
-    }
-
     public List<recorrido> consultar_recorridos() {
 
         List<recorrido> lr = new ArrayList<>();

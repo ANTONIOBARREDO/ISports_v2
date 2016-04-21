@@ -118,8 +118,6 @@ public class Fin extends AppCompatActivity  {
                 startActivity(new Intent(Fin.this, Historia.class));
             }
         });
-
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -137,7 +135,6 @@ public class Fin extends AppCompatActivity  {
             Toast.makeText(this, "No disponible. Compre versión PRO", Toast.LENGTH_LONG).show();
             // return true;
         }
-
 
         return super.onOptionsItemSelected(item);
     }

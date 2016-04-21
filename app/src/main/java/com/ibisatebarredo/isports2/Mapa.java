@@ -150,7 +150,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, View.O
 
                 // mostrar datos en pantalla
                 c_latlon.setText(" GPS: " + location.getLatitude() + ", " + location.getLongitude());
-                c_distancia.setText(Double.toString(distancia) + "\n km");
+                c_distancia.setText(Double.toString(distancia) + "\n m");
                 float num = location.getSpeed();
                 c_velocidad.setText(num * 3.6 + "\n km/h");   // \n
 
@@ -208,7 +208,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, View.O
                 distance += calcular_Distancia(lista.get(i), lista.get(i + 1));
             }
         }
-        return (double) (Math.round((distance/1000)*10)/10);  //((Math.round(distance*1)/1)/1000); // Redondeo a dos decimales y paso a KM
+        return (double) (Math.round((distance)*1)/1); //  (Math.round((distance)*10)/10 Redondeo a dos decimales y paso a KM
     }
 
     public static double calcular_Distancia(LatLng StartP,LatLng EndP){

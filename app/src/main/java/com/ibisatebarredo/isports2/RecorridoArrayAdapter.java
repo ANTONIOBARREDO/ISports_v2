@@ -43,6 +43,7 @@ public class RecorridoArrayAdapter extends ArrayAdapter<recorrido> {
         TextView c_distancia = (TextView)listItemView.findViewById(R.id.c_duracion);
         TextView c_actividad = (TextView)listItemView.findViewById(R.id.c_actividad);
         TextView c_observacion = (TextView)listItemView.findViewById(R.id.c_observacion);
+        TextView l_linea = (TextView)listItemView.findViewById(R.id.l_linea);
 
         //Obteniendo instancia de la Tarea en la posición actual
         recorrido item = getItem(position);
@@ -52,6 +53,7 @@ public class RecorridoArrayAdapter extends ArrayAdapter<recorrido> {
         c_distancia.setText("Distancia: " + item.getDistancia());
         c_actividad.setText("Actividad: " + item.getActividad());
         c_observacion.setText("Comentarios: " + item.getObservacion());
+        l_linea.setText(""); // Dejar separacion
 
         //Devolver al ListView la fila creada
         return listItemView;

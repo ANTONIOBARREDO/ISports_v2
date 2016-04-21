@@ -49,4 +49,13 @@
         android:id="@+id/c_observacion"
         android:layout_below="@+id/c_actividad"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@android:style/TextAppearance.Holo.Medium"
+        android:text="linea"
+        android:id="@+id/l_linea"
+        android:layout_below="@+id/c_observacion"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

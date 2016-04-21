@@ -27,7 +27,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/c_crono"
         android:textSize="25dp"
-        android:layout_marginEnd="30dp"
         android:layout_below="@+id/l_crono"
         android:layout_toStartOf="@+id/b_accion" />
 
@@ -45,8 +44,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Duracion"
         android:id="@+id/l_crono"
-        android:layout_alignBaseline="@+id/l_distancia"
-        android:layout_alignBottom="@+id/l_distancia"
+        android:layout_alignParentTop="true"
         android:layout_alignEnd="@+id/c_crono" />
 
     <TextView
@@ -65,7 +63,7 @@
         android:text="Velocidad"
         android:id="@+id/l_velocidad"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/b_accion" />
+        android:layout_alignEnd="@+id/b_vista" />
 
     <TextView
         android:layout_width="wrap_content"
